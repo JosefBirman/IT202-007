@@ -56,7 +56,7 @@ if (isset($_POST["saved"])) {
             }
         }
         if ($inUse > 0) {
-            flash("Username already in use");
+            flash("Username is already in use");
             //for now we can just stop the rest of the update
             $isValid = false;
         }
@@ -68,10 +68,10 @@ if (isset($_POST["saved"])) {
         $stmt = $db->prepare("UPDATE Users set email = :email, username= :username where id = :id");
         $r = $stmt->execute([":email" => $newEmail, ":username" => $newUsername, ":id" => get_user_id()]);
         if ($r) {
-            flash("Updated profile");
+            flash("Updated profile!");
         }
         else {
-            flash("Error updating profile");
+            flash("Error updating profile!");
         }
         //password is optional, so check if it's even set
         //if so, then check if it's a valid reset request
@@ -83,7 +83,7 @@ if (isset($_POST["saved"])) {
                 $stmt = $db->prepare("UPDATE Users set password = :password where id = :id");
                 $r = $stmt->execute([":id" => get_user_id(), ":password" => $hash]);
                 if ($r) {
-                    flash("Reset Password");
+                    flash("Reset password!");
                 }
                 else {
                     flash("Error resetting password");
@@ -110,16 +110,16 @@ if (isset($_POST["saved"])) {
 
 ?>
 
-    <form method="POST">
-        <label for="email">Email</label>
-        <input type="email" name="email" value="<?php safer_echo(get_email()); ?>"/>
-        <label for="username">Username</label>
-        <input type="text" maxlength="60" name="username" value="<?php safer_echo(get_username()); ?>"/>
-        <!-- DO NOT PRELOAD PASSWORD-->
-        <label for="pw">Password</label>
-        <input type="password" name="password"/>
-        <label for="cpw">Confirm Password</label>
-        <input type="password" name="confirm"/>
-        <input type="submit" name="saved" value="Save Profile"/>
-    </form>
+<form method="POST">
+    <label for="email">Email</label>
+    <input type="email" name="email" value="<?php safer_echo(get_email()); ?>"/>
+    <label for="username">Username</label>
+    <input type="text" maxlength="60" name="username" value="<?php safer_echo(get_username()); ?>"/>
+    <!-- DO NOT PRELOAD PASSWORD-->
+    <label for="pw">Password</label>
+    <input type="password" name="password"/>
+    <label for="cpw">Confirm Password</label>
+    <input type="password" name="confirm"/>
+    <input type="submit" name="saved" value="Save Profile"/>
+</form>
 <?php require(__DIR__ . "/partials/flash.php");
