@@ -61,7 +61,7 @@ if(isset($id)){
 	<label>User_id</label>
 	<input user_id="user_id" placeholder="user_id" name="user_id"/>
 	<label>Score</label>
-	<input score="score" placeholder="score" name="score"/>
+	<input score="score" placeholder="Score" name="score"/>
 	<input type="submit" name="save" value="Update"/>
 </form>
 

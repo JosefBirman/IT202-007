@@ -6,4 +6,5 @@ CREATE TABLE Scores
     created TIMESTAMP default current_timestamp,
     primary key (id),
     foreign key (user_id) references Users (id)
+
 )
