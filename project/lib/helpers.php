@@ -70,4 +70,3 @@ function getMessages() {
 
 //end flash
 ?>
-
