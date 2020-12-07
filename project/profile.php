@@ -97,6 +97,7 @@ if (isset($_POST["saved"])) {
         if ($result) {
             $email = $result["email"];
             $username = $result["username"];
+            $points = $result["points"];
             //let's update our session too
             $_SESSION["user"]["email"] = $email;
             $_SESSION["user"]["username"] = $username;
@@ -112,13 +113,17 @@ if (isset($_POST["saved"])) {
 
 
 <?php //printing out points on profile
- $points = 0;
- if (isset($_SESSION["user"]) && isset($_SESSION["user"]["points"])) {
-    $points = $_SESSION["user"]["points"];
- }
+    $query = get_user_id();
+    $result = [];
+    $stmt = $db->prepare("SELECT points from Users WHERE id = $query");
+    $r = $stmt->execute();
+    if ($r) {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($results as $r):
+            flash("Your Total Points: ". $r["points"]);
+            endforeach;
+    }
 ?>
-<div>Your Points: <?php safer_echo($points); ?></div>
-
 
 <form method="POST">
     <label for="email">Email</label>
