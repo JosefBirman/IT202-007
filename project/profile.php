@@ -110,6 +110,16 @@ if (isset($_POST["saved"])) {
 
 ?>
 
+
+<?php //printing out points on profile
+ $points = 0;
+ if (isset($_SESSION["user"]) && isset($_SESSION["user"]["points"])) {
+    $points = $_SESSION["user"]["points"];
+ }
+?>
+<div>Your Points: <?php safer_echo($points); ?></div>
+
+
 <form method="POST">
     <label for="email">Email</label>
     <input type="email" name="email" value="<?php safer_echo(get_email()); ?>"/>
@@ -123,10 +133,8 @@ if (isset($_POST["saved"])) {
     <input type="submit" name="saved" value="Save Profile"/>
 </form>
 
+
 <?php
-
-
-
 $query = get_user_id();
 $results = [];
 if (isset($_POST["query"])) {
