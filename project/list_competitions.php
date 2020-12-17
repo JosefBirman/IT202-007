@@ -84,6 +84,7 @@ else {
                     <div class="list-group-item">
                         <div class="row">
                             <div class="col">
+                                <div>------------------------</div>
                                 <div> Name </div>
                                 <?php safer_echo($r["name"]); ?>
                             </div>
@@ -103,6 +104,7 @@ else {
                             <div class="col">
                                 <div> Expires </div>
                                 <?php safer_echo($r["expires"]); ?>
+                                <div>------------------------</div>
                             </div>
                             <div class="col">
                                 <?php if ($r["reg"] != get_user_id()): ?>
